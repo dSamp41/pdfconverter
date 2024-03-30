@@ -30,11 +30,15 @@ public class Converter {
                 }
             }
 
-            for(int i=0; i<doc.getNumberOfPages(); i++){
+            int nPages = doc.getNumberOfPages();
+
+            for(int i=0; i<nPages; i++){
                 BufferedImage page = renderer.renderImageWithDPI(i, DPI);
                 
                 File outputFile = new File(outputDir, "/page_" + (i+1) + ".png");
                 ImageIO.write(page, "png", outputFile);
+
+                System.out.printf("Completed page %d/%d\n", i, nPages);
             }
         } 
         catch (IOException e) {
