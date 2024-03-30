@@ -12,8 +12,6 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
 public class Converter {
-    private static final int DPI = 300;
-
     public void convert(String filePath){
         File f = new File(filePath);
         try (PDDocument doc = Loader.loadPDF(f)) {
@@ -33,7 +31,7 @@ public class Converter {
             int nPages = doc.getNumberOfPages();
 
             for(int i=0; i<nPages; i++){
-                BufferedImage page = renderer.renderImageWithDPI(i, DPI);
+                BufferedImage page = renderer.renderImage(i);
                 
                 File outputFile = new File(outputDir, "/page_" + (i+1) + ".png");
                 ImageIO.write(page, "png", outputFile);
